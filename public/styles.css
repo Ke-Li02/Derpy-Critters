@@ -1,0 +1,171 @@
+/* Layout */
+
+body {
+    background-color: #EEE2DC;
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+table#main {
+    width: 99vw;
+}
+
+td {
+    padding: 2px;
+}
+
+.emphasis {
+    font-weight: bold;
+}
+
+/* Link Styles */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Header Styles */
+
+#header {
+    height: 100px;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #123C69;
+    background-color: white;
+}
+
+#header div {
+    width: 100%;
+}
+
+#logo {
+    height: 100px;
+    padding-left: 20px;
+}
+
+#date {
+    position: absolute;
+    right: 20px;
+    color: #123C69;
+}
+
+/* Menu Styles */
+
+#menuTitle {
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom-style: solid;
+    border-bottom-color: #123C69;
+}
+
+#menu {
+    width: 200px;
+    vertical-align: top;
+}
+
+#menu div {
+    position: sticky;
+    top: 0;
+    margin-top: 20px;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #123C69;
+    background-color: #EEE2DC;
+}
+
+#menu ul, #content ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu li {
+    padding: 10px; 
+    color: #123C69;
+}
+
+#menu li#active {
+    background-color: #907163;
+    color: white;
+}
+
+#menu li.option:hover {
+    background-color: #907163;
+    color: white;
+}
+
+/* Content Styles */
+
+#content {
+    padding: 10px;
+    height: 380px;
+    vertical-align: top;
+    border-style: none;
+    color: #123C69;
+}
+
+.normalHeight {
+    line-height: normal;
+}
+
+#description {
+    width: 95%;
+    height: 25vh;
+}
+
+.critterTable {
+    width: 100%;
+    padding: 20px 0 20px 0;
+
+}
+ 
+.critterTable tr, .images {
+    width: 100%;
+}
+
+.imageOptions {
+    width: 100%;
+    text-align: center;
+}
+
+.critterTable tr td {
+    width: 50%;
+    vertical-align: top;
+}
+
+.critterDescription {
+    padding: 0 0 0 20px;
+}
+
+#content .option:hover {
+    opacity: 75%;
+}
+
+.error {
+    color: #AA4A44;
+}
+
+.valid {
+    color: #50C878;
+}
+
+/* Footer Styles */
+
+.lastRow {
+    height: 10px;
+}
+
+.topBar {
+    border-top-style: solid;
+    border-color: #123C69;
+    color: #123C69;
+}
+
+.bottomBar {
+    border-bottom-style: solid;
+    border-color: #123C69;
+    color: #123C69;
+}

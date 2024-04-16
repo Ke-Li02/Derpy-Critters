@@ -1,0 +1,5 @@
+0:admin:Mayamoto:Cat:null:8&12:Male:true:true:true:true
+1:admin:Moon:Cat:null:0&2:Female:true:true:true:true
+2:admin:Sen:Cat:Grey:3&7:Female:false:true:true:true
+3:admin:Banshee:Cat:Calico:3&7:Female:true:false:true:true
+4:admin:Solis:Cat:Orange:8&12:Male:false:false:false:true

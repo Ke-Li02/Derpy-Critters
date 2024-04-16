@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Derpy Critter Shelter</title>
+    <meta charset="utf-8">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <script src="scripts.js"></script>
+</head>
+
+<body onload="updateTime()">
+    <table id="main">
+    <tr><td colspan="2" id="header">
+        <!-- Header Section -->
+        <a href="index.html" target="_self">
+            <div><img src="images/logo.png" alt="website logo" id="logo"><span id="date"></span></div>
+        </a>
+    </td></tr>
+    
+    <tr class="secondRow"><td rowspan="2" id="menu">
+        <!-- Side Menu Section -->
+        <div><ul>
+            <li id="menuTitle">Menu</li>
+            <li class="option"><a href="index.html">Home Page</a></li>
+            <li class="option"><a href="/find">Find a Dog/Cat</a></li>
+            <li class="option"><a href="dog.html">Dog Care</a></li>
+            <li class="option"><a href="cat.html">Cat Care</a></li>
+            <li class="option"><a href="/give">Give a Pet Away</a></li>
+            <li id="active">Log In/Out</a></li>
+            <li class="option"><a href="contact.html">Contact Us</a></li>
+            <li></li>
+        </ul></div>
+    </td>
+    
+    <td id="content">
+        <!-- Content Section -->
+        <h1 class="normalHeight">Login/Create an Account</h1>
+        <form action="/login" method="post">
+            <fieldset>
+                <legend>Login</legend>
+                <label for="username">Username: </label>
+                <input type="text" name="username" value="<%= login.username %>" id="username"><br>
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password"><br>
+                <%if (login.message != '') {%>
+                    <span id="loginMessage" class=<%= (login.error ? "error" : "valid") %>><%= login.message %></span><br>
+                <%}%>
+                <input type="submit" value="Login">
+            </fieldset>
+        </form>
+        <form action="/create" method="post">
+            <fieldset>
+                <legend>Create an Account</legend>
+                <label for="username">Username: </label>
+                <input type="text" name="username" value="<%= create.username %>" id="username"><br>
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password"><br>
+                <%if (create.message != '') {%>
+                    <span id="createMessage" class=<%= (create.error ? "error" : "valid") %>><%= create.message %></span><br>
+                <%}%>
+                <input type="submit" value="Create">
+            </fieldset>
+        </form>
+    </td>
+
+    <tr class="lastRow"><td class="topBar">
+        <!-- Footer Section -->
+        <a href="statement.html"><b>Privacy/Disclosure Statement</b></a>
+    </td></tr>
+    </table>
+</body>
+
+</html>

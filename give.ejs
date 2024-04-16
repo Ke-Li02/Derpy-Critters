@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Derpy Critter Shelter</title>
+    <meta charset="utf-8">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <script src="scripts.js"></script>
+</head>
+
+<body onload="updateTime()">
+    <table id="main">
+    <tr><td colspan="2" id="header">
+        <!-- Header Section -->
+        <a href="index.html" target="_self">
+            <div><img src="images/logo.png" alt="website logo" id="logo"><span id="date"></span></div>
+        </a>
+    </td></tr>
+    
+    <tr class="secondRow"><td rowspan="2" id="menu">
+        <!-- Side Menu Section -->
+        <div><ul>
+            <li id="menuTitle">Menu</li>
+            <li class="option"><a href="index.html">Home Page</a></li>
+            <li class="option"><a href="/find">Find a Dog/Cat</a></li>
+            <li class="option"><a href="dog.html">Dog Care</a></li>
+            <li class="option"><a href="cat.html">Cat Care</a></li>
+            <li id="active">Give a Pet Away</li>
+            <li class="option"><a href="/log">Log In/Out</a></li>
+            <li class="option"><a href="contact.html">Contact Us</a></li>
+            <li></li>
+        </ul></div>
+    </td>
+    
+    <td id="content">
+        <!-- Content Section -->
+        <h1 class="normalHeight">Give a Critter Away:</h1>
+        <form id="give" onsubmit="return validGive();" method="post">
+            <fieldset>
+                <legend>Give Your Furry Friend Away</legend>
+
+                <label class="emphasis" for="critterName">Critter name: </label>
+                <input type="text" name="critterName" id="critterName" value="<%= prevInput.critterName ? prevInput.critterName : '' %>">
+                <span id="critterNameError" class="error"></span><br>
+
+                <label class="emphasis">Critter type: </label>
+                <input type="radio" name="type" value="Cat" id="cat" <%= prevInput.type == 'Cat' ? 'checked' : '' %>>
+                <label for="cat">Cat </label>
+                <input type="radio" name="type" value="Dog" id="dog" <%= prevInput.type == 'Dog' ? 'checked' : '' %>>
+                <label for="dog">Dog </label>
+                <input type="radio" name="type" value="null" id="nullType" <%= prevInput.type == 'null' ? 'checked' : '' %>>
+                <label for="nullType">Unknown</label>
+                <span id="typeError" class="error"></span><br>
+
+                <label class="emphasis">Critter breed: </label>
+                <input type="radio" name="breed" value="other" id="breed" <%= prevInput.breed == 'other' ? 'checked' : '' %>>
+                <input type="text" name="specificBreed" id="specificBreed" value="<%= prevInput.specificBreed ? prevInput.specificBreed : '' %>">
+                <input type="radio" name="breed" value="null" id="nullBreed" <%= prevInput.breed == 'null' ? 'checked' : '' %>>
+                <label for="nullBreed">Unknown</label>
+                <span id="breedError" class="error"></span><br>
+
+                <label class="emphasis">Critter age: </label>
+                <input type="radio" name="age" value="other" id="age" <%= prevInput.age == 'other' ? 'checked' : '' %>>
+                <select name="specificAge" id="specificAge">
+                    <option value="0&2" <%= prevInput.specificAge == '0&2' ? 'selected' : '' %>>Less than 2yo</option>
+                    <option value="3&7" <%= prevInput.specificAge == '3&7' ? 'selected' : '' %>>Between 3 and 7yo</option>
+                    <option value="8&12" <%= prevInput.specificAge == '8&12' ? 'selected' : '' %>>Between 8 and 12yo</option>
+                    <option value="13&17" <%= prevInput.specificAge == '13&17' ? 'selected' : '' %>>Between 13 and 17yo</option>
+                    <option value="18&25" <%= prevInput.specificAge == '18&25' ? 'selected' : '' %>>More than 18yo</option>
+                </select>
+                <input type="radio" name="age" value="null" id="nullAge" <%= prevInput.age == 'null' ? 'checked' : '' %>>
+                <label for="nullAge">Unknown</label>
+                <span id="ageError" class="error"></span><br>
+
+                <label class="emphasis">Critter gender: </label>
+                <input type="radio" name="gender" value="Male" id="male" <%= prevInput.gender == 'Male' ? 'checked' : '' %>>
+                <label for="male">Male </label>
+                <input type="radio" name="gender" value="Female" id="female" <%= prevInput.gender == 'Female' ? 'checked' : '' %>>
+                <label for="female">Female </label>
+                <input type="radio" name="gender" value="null" id="nullGender" <%= prevInput.gender == 'null' ? 'checked' : '' %>>
+                <label for="nullGender">Unknown</label>
+                <span id="genderError" class="error"></span><br>
+
+                <label class="emphasis">Gets along with other: </label>
+                <input type="checkbox" name="dogs" value="true" id="dogs" <%= prevInput.dogs == 'true' ? 'checked' : '' %>>
+                <label for="dogs">Dogs </label>
+                <input type="checkbox" name="cats" value="true" id="cats" <%= prevInput.cats == 'true' ? 'checked' : '' %>>
+                <label for="cats">Cats </label>
+                <input type="checkbox" name="children" value="true" id="children" <%= prevInput.children == 'true' ? 'checked' : '' %>>
+                <label for="children">Children </label><br>
+                
+                <label class="emphasis" for="firstName">Current owner's first name: </label>
+                <input type="text" name="firstName" id="firstName" value="<%= prevInput.firstName ? prevInput.firstName : '' %>">
+                <span id="firstNameError" class="error"></span><br>
+
+                <label class="emphasis" for="lastName">Current owner's last name: </label>
+                <input type="text" name="lastName" id="lastName" value="<%= prevInput.lastName ? prevInput.lastName : '' %>">
+                <span id="lastNameError" class="error"></span><br>
+
+                <label class="emphasis" for="email">Email: </label>
+                <input type="text" name="email" id="email" value="<%= prevInput.email ? prevInput.email : '' %>">
+                <span id="emailError" class="error"></span><br>
+            </fieldset><br>
+
+            <fieldset>
+                <legend>Description</legend>
+
+                <label class="emphasis">Tell us about your critter! : </label><br>
+                <textarea name="description" id="description"><%= prevInput.description ? prevInput.description : '' %></textarea>
+                <span id="descriptionError" class="error"></span><br>
+            </fieldset>
+            
+            <% if (message != "") { %>
+                <span class="<%= error ? 'error' : 'valid' %>"><%= message %></span><br>
+            <% } %>
+
+            <input type="submit" name="submit" id="submit">
+            <input type="reset" name="reset" id="reset" value="Clear">
+        </form><br>
+    </td></tr>
+
+    <tr class="lastRow"><td class="topBar">
+        <!-- Footer Section -->
+        <a href="statement.html"><b>Privacy/Disclosure Statement</b></a>
+    </td></tr>
+    </table>
+</body>
+
+</html>

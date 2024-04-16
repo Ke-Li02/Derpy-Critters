@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Derpy Critter Shelter</title>
+    <meta charset="utf-8">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <script src="scripts.js"></script>
+</head>
+
+<body onload="updateTime(); imageInit();">
+    <table id="main">
+    <tr><td colspan="2" id="header">
+        <!-- Header Section -->
+        <a href="index.html" target="_self">
+            <div><img src="images/logo.png" alt="website logo" id="logo"><span id="date"></span></div>
+        </a>
+    </td></tr>
+    
+    <tr class="secondRow"><td rowspan="2" id="menu">
+        <!-- Side Menu Section -->
+        <div><ul>
+            <li id="menuTitle">Menu</li>
+            <li class="option"><a href="index.html">Home Page</a></li>
+            <li id="active">Find a Dog/Cat</li>
+            <li class="option"><a href="dog.html">Dog Care</a></li>
+            <li class="option"><a href="cat.html">Cat Care</a></li>
+            <li class="option"><a href="/give">Give a Pet Away</a></li>
+            <li class="option"><a href="/log">Log In/Out</a></li>
+            <li class="option"><a href="contact.html">Contact Us</a></li>
+            <li></li>
+        </ul></div>
+    </td>
+    
+    <td id="content">
+        <!-- Content Section -->
+        <h1 class="normalHeight">Adopt a Critter:</h1>
+        <form id="find" onsubmit="return validFind();">
+            <fieldset>
+                <legend>Find a Furry Friend!</legend>
+
+                <label class="emphasis">Critter type: </label>
+                <input type="radio" name="type" value="Cat" id="cat" <%= prevInput.type == 'Cat' ? 'checked' : '' %>>
+                <label for="cat">Cat </label>
+                <input type="radio" name="type" value="Dog" id="dog" <%= prevInput.type == 'Dog' ? 'checked' : '' %>>
+                <label for="dog">Dog </label>
+                <input type="radio" name="type" value="null" id="nullType" <%= prevInput.type == 'null' ? 'checked' : '' %>>
+                <label for="nullType">No Preference</label>
+                <span id="typeError" class="error"></span><br>
+
+                <label class="emphasis">Critter breed: </label>
+                <input type="radio" name="breed" value="other" id="breed" <%= prevInput.breed == 'other' ? 'checked' : '' %>>
+                <input type="text" name="specificBreed" id="specificBreed" value="<%= prevInput.specificBreed ? prevInput.specificBreed : '' %>">
+                <input type="radio" name="breed" value="null" id="nullBreed" <%= prevInput.breed == 'null' ? 'checked' : '' %>>
+                <label for="nullBreed">No Preference</label>
+                <span id="breedError" class="error"></span><br>
+
+                <label class="emphasis">Critter age: </label>
+                <input type="radio" name="age" value="other" id="age" <%= prevInput.age == 'other' ? 'checked' : '' %>>
+                <select name="specificAge" id="specificAge">
+                    <option value="0&2" <%= prevInput.specificAge == '0&2' ? 'selected' : '' %>>Less than 2yo</option>
+                    <option value="3&7" <%= prevInput.specificAge == '3&7' ? 'selected' : '' %>>Between 3 and 7yo</option>
+                    <option value="8&12" <%= prevInput.specificAge == '8&12' ? 'selected' : '' %>>Between 8 and 12yo</option>
+                    <option value="13&17" <%= prevInput.specificAge == '13&17' ? 'selected' : '' %>>Between 13 and 17yo</option>
+                    <option value="18&25" <%= prevInput.specificAge == '18&25' ? 'selected' : '' %>>More than 18yo</option>
+                </select>
+                <input type="radio" name="age" value="null" id="nullAge" <%= prevInput.age == 'null' ? 'checked' : '' %>>
+                <label for="nullAge">No Preference</label>
+                <span id="ageError" class="error"></span><br>
+
+                <label class="emphasis">Critter gender: </label>
+                <input type="radio" name="gender" value="Male" id="male" <%= prevInput.gender == 'Male' ? 'checked' : '' %>>
+                <label for="male">Male </label>
+                <input type="radio" name="gender" value="Female" id="female" <%= prevInput.gender == 'Female' ? 'checked' : '' %>>
+                <label for="female">Female </label>
+                <input type="radio" name="gender" value="null" id="nullGender" <%= prevInput.gender == 'null' ? 'checked' : '' %>>
+                <label for="nullGender">No Preference</label>
+                <span id="genderError" class="error"></span><br>
+
+                <label class="emphasis">Gets along with other: </label>
+                <input type="checkbox" name="dogs" value="true" id="dogs" <%= prevInput.dogs == 'true' ? 'checked' : '' %>>
+                <label for="dogs">Dogs </label>
+                <input type="checkbox" name="cats" value="true" id="cats" <%= prevInput.cats == 'true' ? 'checked' : '' %>>
+                <label for="cats">Cats </label>
+                <input type="checkbox" name="children" value="true" id="children" <%= prevInput.children == 'true' ? 'checked' : '' %>>
+                <label for="children">Children </label>
+            </fieldset>
+            <input type="submit" name="submit" id="submit">
+            <input type="reset" name="reset" id="reset" value="Clear">
+        </form>
+        <% if (display) { %>
+            <br><div class="bottomBar"><%= petsToDisplay.length %> out of <%= pets.length %> critter(s) match your requirements!</div>
+            <ul>
+                <% for (let i of petsToDisplay) { %>
+                    <% let temper = ''; %>
+                    <% if (pets[i][7] == 'true') temper += 'Dogs'; %>
+                    <% if (pets[i][8] == 'true') temper += (temper == '' ? '' : ', ') + 'Cats'; %>
+                    <% if (pets[i][9] == 'true') temper += (temper == '' ? '' : ', ') + 'Children'; %>
+                    <% if (temper == '') temper = 'None' %>
+                    <li>
+                        <table class="critterTable">
+                            <tr>
+                                <td>
+                                    <img src="<%= pets[i][10] == 'true' ? `images/${i}-0.jpg` : 'images/no-image.png' %>" id="images<%= i %>" class="images" alt="images of a critter">
+                                    <% if (pets[i][10] == 'true') { %>
+                                        <table class="imageOptions"><tr>
+                                            <th class="option" onclick="browse(<%= i %>, -1);">PREV</th>
+                                            <td id="count<%= i %>"></td>
+                                            <th class="option" onclick="browse(<%= i %>, 1);">NEXT</th>
+                                        </tr></table>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <p class="critterDescription">
+                                        <span class="emphasis">Name:</span> <%= pets[i][2] == 'null' ? 'Unknown' : pets[i][2] %><br>
+                                        <span class="emphasis">Type:</span> <%= pets[i][3] == 'null' ? 'Unknown' : pets[i][3] %><br>
+                                        <span class="emphasis">Breed:</span> <%= pets[i][4] == 'null' ? 'Unknown' : pets[i][4] %><br>
+                                        <span class="emphasis">Age:</span> <%= pets[i][5] == 'null' ? 'Unknown' : ('Between ' + pets[i][5].split('&').join(' and ') + 'yo') %><br>
+                                        <span class="emphasis">Gender:</span> <%= pets[i][6] == 'null' ? 'Unknown' : pets[i][6] %><br>
+                                        <span class="emphasis">Gets along with:</span> <%= temper %><br>
+                                        <span class="emphasis">Interested?: </span><input type="checkbox" name="interest<%= i %>" id="interest<%= i %>">
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                <% } %>
+            </ul>
+        <% } %>
+    </td></tr>
+
+    <tr class="lastRow"><td class="topBar">
+        <!-- Footer Section -->
+        <a href="statement.html"><b>Privacy/Disclosure Statement</b></a>
+    </td></tr>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Derpy Critter Shelter</title>
+    <meta charset="utf-8">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <script src="scripts.js"></script>
+</head>
+
+<body onload="updateTime()">
+    <table id="main">
+    <tr><td colspan="2" id="header">
+        <!-- Header Section -->
+        <a href="index.html" target="_self">
+            <div><img src="images/logo.png" alt="website logo" id="logo"><span id="date"></span></div>
+        </a>
+    </td></tr>
+    
+    <tr class="secondRow"><td rowspan="2" id="menu">
+        <!-- Side Menu Section -->
+        <div><ul>
+            <li id="menuTitle">Menu</li>
+            <li class="option"><a href="index.html">Home Page</a></li>
+            <li class="option"><a href="/find">Find a Dog/Cat</a></li>
+            <li class="option"><a href="dog.html">Dog Care</a></li>
+            <li class="option"><a href="cat.html">Cat Care</a></li>
+            <li class="option"><a href="/give">Give a Pet Away</a></li>
+            <li id="active">Log In/Out</a></li>
+            <li class="option"><a href="contact.html">Contact Us</a></li>
+            <li></li>
+        </ul></div>
+    </td>
+    
+    <td id="content">
+        <!-- Content Section -->
+        <h1 class="normalHeight">Logout</h1>
+        <form action="/logout" method="post">
+            <fieldset>
+                <legend>Logout</legend>
+                You are currently logged in as: <span class="emphasis"><%= username %></span><br>
+                Please press the following button to logout of your account: <input type="submit" value="Logout">
+            </fieldset>
+        </form>
+    </td>
+
+    <tr class="lastRow"><td class="topBar">
+        <!-- Footer Section -->
+        <a href="statement.html"><b>Privacy/Disclosure Statement</b></a>
+    </td></tr>
+    </table>
+</body>
+
+</html>
