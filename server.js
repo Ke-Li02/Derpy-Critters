@@ -2,7 +2,6 @@ const path = require('path');
 const fs = require('fs');
 const express = require('express');
 const session = require('express-session');
-const { error } = require('console');
 const app = express();
 const PORT = 5197;
 
@@ -22,11 +21,11 @@ app.get('/find', (req, res) => {
         cats = req.query.cats,
         children = req.query.children;
 
-    if (!type || !breed || (!specificBreed && breed == 'other') || !age || (!specificAge && age == 'other') || !gender) {
+    if (!type || !breed || (!specificBreed && breed == 'Other') || !age || (!specificAge && age == 'Other') || !gender) {
         res.render(path.join(__dirname, 'find.ejs'), {
             display: false,
-            pets: null,
-            petsToDisplay: null,
+            critters: null,
+            crittersToDisplay: null,
             prevInput: {}
         });
     }
@@ -34,16 +33,16 @@ app.get('/find', (req, res) => {
         fs.readFile(path.join(__dirname, 'critters.txt'), (err, data) => {
             if (err) console.log(err);
 
-            let specifications = [type, (breed == 'null' ? 'null' : specificBreed), (age == 'null' ? 'null' : specificAge), gender, Boolean(dogs), Boolean(cats), Boolean(children)];
+            let specifications = [type, (breed == 'Unknown' ? 'Unknown' : specificBreed), (age == 'Unknown' ? 'Unknown' : specificAge), gender, Boolean(dogs), Boolean(cats), Boolean(children)];
             let toDisplay = [];
             data = data.toString().split('\n');
 
             for (let i = 0; i < data.length; i++) {
                 data[i] = data[i].split(':');
-                if ((specifications[0] == 'null' || specifications[0] == data[i][3]) &&
-                    (specifications[1] == 'null' || specifications[1] == data[i][4]) &&
-                    (specifications[2] == 'null' || specifications[2] == data[i][5]) &&
-                    (specifications[3] == 'null' || specifications[3] == data[i][6]) &&
+                if ((specifications[0] == 'Unknown' || specifications[0] == data[i][3]) &&
+                    (specifications[1] == 'Unknown' || specifications[1] == data[i][4]) &&
+                    (specifications[2] == 'Unknown' || specifications[2] == data[i][5]) &&
+                    (specifications[3] == 'Unknown' || specifications[3] == data[i][6]) &&
                     (!specifications[4] || data[i][7] == 'true') &&
                     (!specifications[5] || data[i][8] == 'true') &&
                     (!specifications[6] || data[i][9] == 'true')) {
@@ -54,8 +53,8 @@ app.get('/find', (req, res) => {
 
             res.render(path.join(__dirname, 'find.ejs'), {
                 display: true,
-                pets: data,
-                petsToDisplay: toDisplay,
+                critters: data,
+                crittersToDisplay: toDisplay,
                 prevInput: req.query
             });
         });
@@ -81,10 +80,12 @@ app.post('/give', (req, res) => {
             data = Number(data.toString());
 
             fs.appendFile(path.join(__dirname, 'critters.txt'),
-            `\n${data}:${req.session.username}:${req.body.critterName ? req.body.critterName : 'null'}` + 
-            `:${req.body.type ? req.body.type : 'null'}:${req.body.breed == 'other' ? req.body.specificBreed : 'null'}` +
-            `:${req.body.age == 'other' ? req.body.specificAge : 'null'}:${req.body.gender ? req.body.gender : 'null'}` +
-            `:${req.body.dogs == 'true'}:${req.body.cats == 'true'}:${req.body.children == 'true'}:false`, (err) => {
+            `\n${data}:${req.session.username}:${req.body.critterName ? req.body.critterName : 'Unknown'}` + 
+            `:${req.body.type ? req.body.type : 'Unknown'}:${req.body.breed == 'Other' ? req.body.specificBreed : 'Unknown'}` +
+            `:${req.body.age == 'Other' ? req.body.specificAge : 'Unknown'}:${req.body.gender ? req.body.gender : 'Unknown'}` +
+            `:${req.body.dogs == 'true'}:${req.body.cats == 'true'}:${req.body.children == 'true'}:false` +
+            `:${req.body.firstName ? req.body.firstName : 'Unknown'}:${req.body.lastName ? req.body.lastName : 'Unknown'}` +
+            `:${req.body.email ? req.body.email : 'Unknown'}:${req.body.description ? req.body.description : 'Unknown'}`, (err) => {
                 if (err) console.log(err);
             });
             fs.appendFile(path.join(__dirname, 'public/images/images.txt'), '\n', (err) => {

@@ -185,9 +185,4 @@ function imageInit() {
     }).catch((reason) => {
         console.log(reason);
     });
-}    
-    
-
-    
-    
-
+}

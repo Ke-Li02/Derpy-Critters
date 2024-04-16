@@ -44,19 +44,19 @@
                 <label for="cat">Cat </label>
                 <input type="radio" name="type" value="Dog" id="dog" <%= prevInput.type == 'Dog' ? 'checked' : '' %>>
                 <label for="dog">Dog </label>
-                <input type="radio" name="type" value="null" id="nullType" <%= prevInput.type == 'null' ? 'checked' : '' %>>
-                <label for="nullType">No Preference</label>
+                <input type="radio" name="type" value="Unknown" id="unknownType" <%= prevInput.type == 'Unknown' ? 'checked' : '' %>>
+                <label for="unknownType">No Preference</label>
                 <span id="typeError" class="error"></span><br>
 
                 <label class="emphasis">Critter breed: </label>
-                <input type="radio" name="breed" value="other" id="breed" <%= prevInput.breed == 'other' ? 'checked' : '' %>>
+                <input type="radio" name="breed" value="Other" id="breed" <%= prevInput.breed == 'Other' ? 'checked' : '' %>>
                 <input type="text" name="specificBreed" id="specificBreed" value="<%= prevInput.specificBreed ? prevInput.specificBreed : '' %>">
-                <input type="radio" name="breed" value="null" id="nullBreed" <%= prevInput.breed == 'null' ? 'checked' : '' %>>
-                <label for="nullBreed">No Preference</label>
+                <input type="radio" name="breed" value="Unknown" id="unknownBreed" <%= prevInput.breed == 'Unknown' ? 'checked' : '' %>>
+                <label for="unknownBreed">No Preference</label>
                 <span id="breedError" class="error"></span><br>
 
                 <label class="emphasis">Critter age: </label>
-                <input type="radio" name="age" value="other" id="age" <%= prevInput.age == 'other' ? 'checked' : '' %>>
+                <input type="radio" name="age" value="Other" id="age" <%= prevInput.age == 'Other' ? 'checked' : '' %>>
                 <select name="specificAge" id="specificAge">
                     <option value="0&2" <%= prevInput.specificAge == '0&2' ? 'selected' : '' %>>Less than 2yo</option>
                     <option value="3&7" <%= prevInput.specificAge == '3&7' ? 'selected' : '' %>>Between 3 and 7yo</option>
@@ -64,8 +64,8 @@
                     <option value="13&17" <%= prevInput.specificAge == '13&17' ? 'selected' : '' %>>Between 13 and 17yo</option>
                     <option value="18&25" <%= prevInput.specificAge == '18&25' ? 'selected' : '' %>>More than 18yo</option>
                 </select>
-                <input type="radio" name="age" value="null" id="nullAge" <%= prevInput.age == 'null' ? 'checked' : '' %>>
-                <label for="nullAge">No Preference</label>
+                <input type="radio" name="age" value="Unknown" id="unknownAge" <%= prevInput.age == 'Unknown' ? 'checked' : '' %>>
+                <label for="unknownAge">No Preference</label>
                 <span id="ageError" class="error"></span><br>
 
                 <label class="emphasis">Critter gender: </label>
@@ -73,8 +73,8 @@
                 <label for="male">Male </label>
                 <input type="radio" name="gender" value="Female" id="female" <%= prevInput.gender == 'Female' ? 'checked' : '' %>>
                 <label for="female">Female </label>
-                <input type="radio" name="gender" value="null" id="nullGender" <%= prevInput.gender == 'null' ? 'checked' : '' %>>
-                <label for="nullGender">No Preference</label>
+                <input type="radio" name="gender" value="Unknown" id="unknownGender" <%= prevInput.gender == 'Unknown' ? 'checked' : '' %>>
+                <label for="unknownGender">No Preference</label>
                 <span id="genderError" class="error"></span><br>
 
                 <label class="emphasis">Gets along with other: </label>
@@ -86,23 +86,28 @@
                 <label for="children">Children </label>
             </fieldset>
             <input type="submit" name="submit" id="submit">
-            <input type="reset" name="reset" id="reset" value="Clear">
+            <input type="reset" name="reset" id="reset">
         </form>
         <% if (display) { %>
-            <br><div class="bottomBar"><%= petsToDisplay.length %> out of <%= pets.length %> critter(s) match your requirements!</div>
+            <br><div class="bottomBar"><%= crittersToDisplay.length %> out of <%= critters.length %> critter(s) match your requirements!</div>
             <ul>
-                <% for (let i of petsToDisplay) { %>
+                <% for (let i of crittersToDisplay) { %>
                     <% let temper = ''; %>
-                    <% if (pets[i][7] == 'true') temper += 'Dogs'; %>
-                    <% if (pets[i][8] == 'true') temper += (temper == '' ? '' : ', ') + 'Cats'; %>
-                    <% if (pets[i][9] == 'true') temper += (temper == '' ? '' : ', ') + 'Children'; %>
+                    <% if (critters[i][7] == 'true') temper += 'Dogs'; %>
+                    <% if (critters[i][8] == 'true') temper += (temper == '' ? '' : ', ') + 'Cats'; %>
+                    <% if (critters[i][9] == 'true') temper += (temper == '' ? '' : ', ') + 'Children'; %>
                     <% if (temper == '') temper = 'None' %>
+                    <% let contact = ''; %>
+                    <% if (critters[i][11] != 'Unknown') contact += critters[i][11]; %>
+                    <% if (critters[i][12] != 'Unknown') contact += (contact == '' ? '' : ' ') + critters[i][12]; %>
+                    <% if (critters[i][13] != 'Unknown') contact += (contact == '' ? '' : ' at ') + critters[i][13]; %>
+                    <% if (contact == '') contact = 'Unknown' %>
                     <li>
                         <table class="critterTable">
                             <tr>
                                 <td>
-                                    <img src="<%= pets[i][10] == 'true' ? `images/${i}-0.jpg` : 'images/no-image.png' %>" id="images<%= i %>" class="images" alt="images of a critter">
-                                    <% if (pets[i][10] == 'true') { %>
+                                    <img src="<%= critters[i][10] == 'true' ? `images/${i}-0.jpg` : 'images/no-image.png' %>" id="images<%= i %>" class="images" alt="images of a critter">
+                                    <% if (critters[i][10] == 'true') { %>
                                         <table class="imageOptions"><tr>
                                             <th class="option" onclick="browse(<%= i %>, -1);">PREV</th>
                                             <td id="count<%= i %>"></td>
@@ -112,13 +117,14 @@
                                 </td>
                                 <td>
                                     <p class="critterDescription">
-                                        <span class="emphasis">Name:</span> <%= pets[i][2] == 'null' ? 'Unknown' : pets[i][2] %><br>
-                                        <span class="emphasis">Type:</span> <%= pets[i][3] == 'null' ? 'Unknown' : pets[i][3] %><br>
-                                        <span class="emphasis">Breed:</span> <%= pets[i][4] == 'null' ? 'Unknown' : pets[i][4] %><br>
-                                        <span class="emphasis">Age:</span> <%= pets[i][5] == 'null' ? 'Unknown' : ('Between ' + pets[i][5].split('&').join(' and ') + 'yo') %><br>
-                                        <span class="emphasis">Gender:</span> <%= pets[i][6] == 'null' ? 'Unknown' : pets[i][6] %><br>
-                                        <span class="emphasis">Gets along with:</span> <%= temper %><br>
-                                        <span class="emphasis">Interested?: </span><input type="checkbox" name="interest<%= i %>" id="interest<%= i %>">
+                                        <span class="emphasis">Name: </span><%= critters[i][2] %><br>
+                                        <span class="emphasis">Type: </span><%= critters[i][3] %><br>
+                                        <span class="emphasis">Breed: </span><%= critters[i][4] %><br>
+                                        <span class="emphasis">Age: </span><%= critters[i][5] == 'Unknown' ? 'Unknown' : ('Between ' + critters[i][5].split('&').join(' and ') + 'yo') %><br>
+                                        <span class="emphasis">Gender: </span><%= critters[i][6] %><br>
+                                        <span class="emphasis">Gets along with: </span><%= temper %><br>
+                                        <span class="emphasis">Description: </span><%= critters[i][14] %><br>
+                                        <span class="emphasis">Contact: </span><%= contact %>
                                     </p>
                                 </td>
                             </tr>

@@ -48,19 +48,19 @@
                 <label for="cat">Cat </label>
                 <input type="radio" name="type" value="Dog" id="dog" <%= prevInput.type == 'Dog' ? 'checked' : '' %>>
                 <label for="dog">Dog </label>
-                <input type="radio" name="type" value="null" id="nullType" <%= prevInput.type == 'null' ? 'checked' : '' %>>
-                <label for="nullType">Unknown</label>
+                <input type="radio" name="type" value="Unknown" id="unknownType" <%= prevInput.type == 'Unknown' ? 'checked' : '' %>>
+                <label for="unknownType">Unknown</label>
                 <span id="typeError" class="error"></span><br>
 
                 <label class="emphasis">Critter breed: </label>
-                <input type="radio" name="breed" value="other" id="breed" <%= prevInput.breed == 'other' ? 'checked' : '' %>>
+                <input type="radio" name="breed" value="Other" id="breed" <%= prevInput.breed == 'Other' ? 'checked' : '' %>>
                 <input type="text" name="specificBreed" id="specificBreed" value="<%= prevInput.specificBreed ? prevInput.specificBreed : '' %>">
-                <input type="radio" name="breed" value="null" id="nullBreed" <%= prevInput.breed == 'null' ? 'checked' : '' %>>
-                <label for="nullBreed">Unknown</label>
+                <input type="radio" name="breed" value="Unknown" id="unknownBreed" <%= prevInput.breed == 'Unknown' ? 'checked' : '' %>>
+                <label for="unknownBreed">Unknown</label>
                 <span id="breedError" class="error"></span><br>
 
                 <label class="emphasis">Critter age: </label>
-                <input type="radio" name="age" value="other" id="age" <%= prevInput.age == 'other' ? 'checked' : '' %>>
+                <input type="radio" name="age" value="Other" id="age" <%= prevInput.age == 'Other' ? 'checked' : '' %>>
                 <select name="specificAge" id="specificAge">
                     <option value="0&2" <%= prevInput.specificAge == '0&2' ? 'selected' : '' %>>Less than 2yo</option>
                     <option value="3&7" <%= prevInput.specificAge == '3&7' ? 'selected' : '' %>>Between 3 and 7yo</option>
@@ -68,8 +68,8 @@
                     <option value="13&17" <%= prevInput.specificAge == '13&17' ? 'selected' : '' %>>Between 13 and 17yo</option>
                     <option value="18&25" <%= prevInput.specificAge == '18&25' ? 'selected' : '' %>>More than 18yo</option>
                 </select>
-                <input type="radio" name="age" value="null" id="nullAge" <%= prevInput.age == 'null' ? 'checked' : '' %>>
-                <label for="nullAge">Unknown</label>
+                <input type="radio" name="age" value="Unknown" id="unknownAge" <%= prevInput.age == 'Unknown' ? 'checked' : '' %>>
+                <label for="unknownAge">Unknown</label>
                 <span id="ageError" class="error"></span><br>
 
                 <label class="emphasis">Critter gender: </label>
@@ -77,17 +77,17 @@
                 <label for="male">Male </label>
                 <input type="radio" name="gender" value="Female" id="female" <%= prevInput.gender == 'Female' ? 'checked' : '' %>>
                 <label for="female">Female </label>
-                <input type="radio" name="gender" value="null" id="nullGender" <%= prevInput.gender == 'null' ? 'checked' : '' %>>
-                <label for="nullGender">Unknown</label>
+                <input type="radio" name="gender" value="Unknown" id="unknownGender" <%= prevInput.gender == 'Unknown' ? 'checked' : '' %>>
+                <label for="unknownGender">Unknown</label>
                 <span id="genderError" class="error"></span><br>
 
                 <label class="emphasis">Gets along with other: </label>
-                <input type="checkbox" name="dogs" value="true" id="dogs" <%= prevInput.dogs == 'true' ? 'checked' : '' %>>
-                <label for="dogs">Dogs </label>
-                <input type="checkbox" name="cats" value="true" id="cats" <%= prevInput.cats == 'true' ? 'checked' : '' %>>
-                <label for="cats">Cats </label>
-                <input type="checkbox" name="children" value="true" id="children" <%= prevInput.children == 'true' ? 'checked' : '' %>>
-                <label for="children">Children </label><br>
+                <input type="checkbox" name="dogs" value="true" id="dogTemper" <%= prevInput.dogs == 'true' ? 'checked' : '' %>>
+                <label for="dogTemper">Dogs </label>
+                <input type="checkbox" name="cats" value="true" id="catTemper" <%= prevInput.cats == 'true' ? 'checked' : '' %>>
+                <label for="catTemper">Cats </label>
+                <input type="checkbox" name="children" value="true" id="childrenTemper" <%= prevInput.children == 'true' ? 'checked' : '' %>>
+                <label for="childrenTemper">Children</label><br>
                 
                 <label class="emphasis" for="firstName">Current owner's first name: </label>
                 <input type="text" name="firstName" id="firstName" value="<%= prevInput.firstName ? prevInput.firstName : '' %>">
@@ -106,7 +106,7 @@
                 <legend>Description</legend>
 
                 <label class="emphasis">Tell us about your critter! : </label><br>
-                <textarea name="description" id="description"><%= prevInput.description ? prevInput.description : '' %></textarea>
+                <textarea name="description" id="description" maxlength="2000"><%= prevInput.description ? prevInput.description : '' %></textarea>
                 <span id="descriptionError" class="error"></span><br>
             </fieldset>
             
@@ -115,7 +115,7 @@
             <% } %>
 
             <input type="submit" name="submit" id="submit">
-            <input type="reset" name="reset" id="reset" value="Clear">
+            <input type="reset" name="reset" id="reset">
         </form><br>
     </td></tr>
 

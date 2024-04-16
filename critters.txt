@@ -1,5 +1,5 @@
-0:admin:Mayamoto:Cat:null:8&12:Male:true:true:true:true
-1:admin:Moon:Cat:null:0&2:Female:true:true:true:true
-2:admin:Sen:Cat:Grey:3&7:Female:false:true:true:true
-3:admin:Banshee:Cat:Calico:3&7:Female:true:false:true:true
-4:admin:Solis:Cat:Orange:8&12:Male:false:false:false:true
+0:admin:Mayamoto:Cat:Unknown:8&12:Male:true:true:true:true:Derpy:Critters:derpycritters@gmail.com:Chonky, ate too much
+1:admin:Moon:Cat:Unknown:0&2:Female:true:true:true:true:Derpy:Critters:derpycritters@gmail.com:Goofy and playful
+2:admin:Sen:Cat:Grey:3&7:Female:false:true:true:true:Derpy:Critters:derpycritters@gmail.com:Sleepy, very calm cat!
+3:admin:Banshee:Cat:Calico:3&7:Female:true:false:true:true:Derpy:Critters:derpycritters@gmail.com:Noisy, will scream incessantly
+4:admin:Solis:Cat:Orange:8&12:Male:false:false:false:true:Derpy:Critters:derpycritters@gmail.com:Terrorist, wanted in 10 countries for assault and battery
