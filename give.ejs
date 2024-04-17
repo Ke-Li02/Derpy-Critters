@@ -35,7 +35,7 @@
     <td id="content">
         <!-- Content Section -->
         <h1 class="normalHeight">Give a Critter Away:</h1>
-        <form id="give" onsubmit="return validGive();" method="post">
+        <form id="give" onsubmit="return validGive();" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend>Give Your Furry Friend Away</legend>
 
@@ -106,8 +106,10 @@
                 <legend>Description</legend>
 
                 <label class="emphasis">Tell us about your critter! : </label><br>
-                <textarea name="description" id="description" maxlength="2000"><%= prevInput.description ? prevInput.description : '' %></textarea>
+                <textarea name="description" id="description" maxlength="1500"><%= prevInput.description ? prevInput.description : '' %></textarea>
                 <span id="descriptionError" class="error"></span><br>
+                <label class="emphasis">Upload pictures of your critter! (optional) : </label>
+                <input name="critterPictures" type="file" accept="image/*" multiple>
             </fieldset>
             
             <% if (message != "") { %>

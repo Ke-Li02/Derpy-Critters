@@ -137,7 +137,10 @@ a {
 }
 
 .critterDescription {
+    width: 40vw;
     padding: 0 0 0 20px;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 #content .option:hover {

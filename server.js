@@ -1,9 +1,16 @@
 const path = require('path');
 const fs = require('fs');
+const multer = require('multer');
 const express = require('express');
 const session = require('express-session');
 const app = express();
 const PORT = 5197;
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {cb(null, path.join(__dirname, 'public/images/'))},
+    filename: (req, file, cb) => {cb(null, Date.now() + file.originalname)}
+});
+const upload = multer({storage: storage});
 
 app.use(session({secret: '`J[2|h^!$#15P-]]htrNE}okGS3.uE\'=)`&;q+:Qt}p;b">v)*dACS=k$~6r2(/h^"({f~'}));
 app.use(express.urlencoded({extended: false}));
@@ -39,13 +46,13 @@ app.get('/find', (req, res) => {
 
             for (let i = 0; i < data.length; i++) {
                 data[i] = data[i].split(':');
-                if ((specifications[0] == 'Unknown' || specifications[0] == data[i][3]) &&
-                    (specifications[1] == 'Unknown' || specifications[1] == data[i][4]) &&
-                    (specifications[2] == 'Unknown' || specifications[2] == data[i][5]) &&
-                    (specifications[3] == 'Unknown' || specifications[3] == data[i][6]) &&
-                    (!specifications[4] || data[i][7] == 'true') &&
-                    (!specifications[5] || data[i][8] == 'true') &&
-                    (!specifications[6] || data[i][9] == 'true')) {
+                if ((specifications[0] == 'Unknown' || specifications[0] == data[i][2]) &&
+                    (specifications[1] == 'Unknown' || specifications[1] == data[i][3]) &&
+                    (specifications[2] == 'Unknown' || specifications[2] == data[i][4]) &&
+                    (specifications[3] == 'Unknown' || specifications[3] == data[i][5]) &&
+                    (!specifications[4] || data[i][6] == 'true') &&
+                    (!specifications[5] || data[i][7] == 'true') &&
+                    (!specifications[6] || data[i][8] == 'true')) {
                     
                     toDisplay.push(i);
                 }
@@ -70,33 +77,32 @@ app.get('/give', (req, res) => {
     }
 });
 
-app.post('/give', (req, res) => {
+app.post('/give', upload.array('critterPictures', 5), (req, res) => {
     if (!req.session.username) {
         res.render(path.join(__dirname, 'give.ejs'), {error: true, message: 'Please login before submitting the form!', prevInput: req.body});
     }
     else {
-        fs.readFile(path.join(__dirname, 'numberOfCritters.txt'), (err, data) => {
+        let images = '\n';
+
+        for (let i = 0; i < req.files.length; i++) {
+            images += (images == '\n' ? '' : ':') + req.files[i].filename;
+        }
+
+        fs.appendFile(path.join(__dirname, 'public/images/images.txt'), images, (err) => {
             if (err) console.log(err);
-            data = Number(data.toString());
-
-            fs.appendFile(path.join(__dirname, 'critters.txt'),
-            `\n${data}:${req.session.username}:${req.body.critterName ? req.body.critterName : 'Unknown'}` + 
-            `:${req.body.type ? req.body.type : 'Unknown'}:${req.body.breed == 'Other' ? req.body.specificBreed : 'Unknown'}` +
-            `:${req.body.age == 'Other' ? req.body.specificAge : 'Unknown'}:${req.body.gender ? req.body.gender : 'Unknown'}` +
-            `:${req.body.dogs == 'true'}:${req.body.cats == 'true'}:${req.body.children == 'true'}:false` +
-            `:${req.body.firstName ? req.body.firstName : 'Unknown'}:${req.body.lastName ? req.body.lastName : 'Unknown'}` +
-            `:${req.body.email ? req.body.email : 'Unknown'}:${req.body.description ? req.body.description : 'Unknown'}`, (err) => {
-                if (err) console.log(err);
-            });
-            fs.appendFile(path.join(__dirname, 'public/images/images.txt'), '\n', (err) => {
-                if (err) console.log(err);
-            });
-            fs.writeFile(path.join(__dirname, 'numberOfCritters.txt'), String(data + 1), {}, (err) => {
-                if (err) console.log(err);
-            });
-
-            res.render(path.join(__dirname, 'give.ejs'), {error: false, message: 'Critter has been successfully uploaded!', prevInput: {}});
         });
+
+        fs.appendFile(path.join(__dirname, 'critters.txt'),
+        `\n${req.session.username}:${req.body.critterName ? req.body.critterName : 'Unknown'}` + 
+        `:${req.body.type ? req.body.type : 'Unknown'}:${req.body.breed == 'Other' ? req.body.specificBreed : 'Unknown'}` +
+        `:${req.body.age == 'Other' ? req.body.specificAge : 'Unknown'}:${req.body.gender ? req.body.gender : 'Unknown'}` +
+        `:${req.body.dogs == 'true'}:${req.body.cats == 'true'}:${req.body.children == 'true'}:${req.files.length != 0}` +
+        `:${req.body.firstName ? req.body.firstName : 'Unknown'}:${req.body.lastName ? req.body.lastName : 'Unknown'}` +
+        `:${req.body.email ? req.body.email : 'Unknown'}:${req.body.description ? req.body.description : 'Unknown'}`, (err) => {
+            if (err) console.log(err);
+        });
+
+        res.render(path.join(__dirname, 'give.ejs'), {error: false, message: 'Critter has been successfully uploaded!', prevInput: {}});
     }
 });
 

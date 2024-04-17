@@ -93,21 +93,21 @@
             <ul>
                 <% for (let i of crittersToDisplay) { %>
                     <% let temper = ''; %>
-                    <% if (critters[i][7] == 'true') temper += 'Dogs'; %>
-                    <% if (critters[i][8] == 'true') temper += (temper == '' ? '' : ', ') + 'Cats'; %>
-                    <% if (critters[i][9] == 'true') temper += (temper == '' ? '' : ', ') + 'Children'; %>
+                    <% if (critters[i][6] == 'true') temper += 'Dogs'; %>
+                    <% if (critters[i][7] == 'true') temper += (temper == '' ? '' : ', ') + 'Cats'; %>
+                    <% if (critters[i][8] == 'true') temper += (temper == '' ? '' : ', ') + 'Children'; %>
                     <% if (temper == '') temper = 'None' %>
                     <% let contact = ''; %>
-                    <% if (critters[i][11] != 'Unknown') contact += critters[i][11]; %>
-                    <% if (critters[i][12] != 'Unknown') contact += (contact == '' ? '' : ' ') + critters[i][12]; %>
-                    <% if (critters[i][13] != 'Unknown') contact += (contact == '' ? '' : ' at ') + critters[i][13]; %>
+                    <% if (critters[i][10] != 'Unknown') contact += critters[i][10]; %>
+                    <% if (critters[i][11] != 'Unknown') contact += (contact == '' ? '' : ' ') + critters[i][11]; %>
+                    <% if (critters[i][12] != 'Unknown') contact += (contact == '' ? '' : ' at ') + critters[i][12]; %>
                     <% if (contact == '') contact = 'Unknown' %>
                     <li>
                         <table class="critterTable">
                             <tr>
                                 <td>
-                                    <img src="<%= critters[i][10] == 'true' ? `images/${i}-0.jpg` : 'images/no-image.png' %>" id="images<%= i %>" class="images" alt="images of a critter">
-                                    <% if (critters[i][10] == 'true') { %>
+                                    <img src="images/no-image.png" id="images<%= i %>" class="images" alt="images of a critter">
+                                    <% if (critters[i][9] == 'true') { %>
                                         <table class="imageOptions"><tr>
                                             <th class="option" onclick="browse(<%= i %>, -1);">PREV</th>
                                             <td id="count<%= i %>"></td>
@@ -117,13 +117,13 @@
                                 </td>
                                 <td>
                                     <p class="critterDescription">
-                                        <span class="emphasis">Name: </span><%= critters[i][2] %><br>
-                                        <span class="emphasis">Type: </span><%= critters[i][3] %><br>
-                                        <span class="emphasis">Breed: </span><%= critters[i][4] %><br>
-                                        <span class="emphasis">Age: </span><%= critters[i][5] == 'Unknown' ? 'Unknown' : ('Between ' + critters[i][5].split('&').join(' and ') + 'yo') %><br>
-                                        <span class="emphasis">Gender: </span><%= critters[i][6] %><br>
+                                        <span class="emphasis">Name: </span><%= critters[i][1] %><br>
+                                        <span class="emphasis">Type: </span><%= critters[i][2] %><br>
+                                        <span class="emphasis">Breed: </span><%= critters[i][3] %><br>
+                                        <span class="emphasis">Age: </span><%= critters[i][4] == 'Unknown' ? 'Unknown' : ('Between ' + critters[i][4].split('&').join(' and ') + 'yo') %><br>
+                                        <span class="emphasis">Gender: </span><%= critters[i][5] %><br>
                                         <span class="emphasis">Gets along with: </span><%= temper %><br>
-                                        <span class="emphasis">Description: </span><%= critters[i][14] %><br>
+                                        <span class="emphasis">Description: </span><%= critters[i][13] %><br>
                                         <span class="emphasis">Contact: </span><%= contact %>
                                     </p>
                                 </td>
