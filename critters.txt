@@ -1,5 +1,7 @@
 admin:Mayamoto:Cat:Unknown:8&12:Male:true:true:true:true:Derpy:Critters:derpycritters@gmail.com:Chonky, ate too much
 admin:Moon:Cat:Unknown:0&2:Female:true:true:true:true:Derpy:Critters:derpycritters@gmail.com:Goofy and playful
 admin:Sen:Cat:Grey:3&7:Female:false:true:true:true:Derpy:Critters:derpycritters@gmail.com:Sleepy, very calm cat!
-admin:Banshee:Cat:Calico:3&7:Female:true:false:true:true:Derpy:Critters:derpycritters@gmail.com:Noisy, will scream incessantly
+admin:Banshee:Cat:Calico:0&2:Female:false:false:false:true:Lunicia:Sciandra:sc.lunicia@gmail.com:She is loud! You can keep her ;P
 admin:Solis:Cat:Orange:8&12:Male:false:false:false:true:Derpy:Critters:derpycritters@gmail.com:Terrorist, wanted in 10 countries for assault and battery
+admin:Peepee:Dog:Yorkshire terrier:3&7:Male:true:true:true:true:Paulo:peepo:ehuipaul94@gmail.com:it meows for some reasons, i don't know why though. Apart from that, it is very cute and pretty much get along with everyone!
+admin:Tantan:Cat:Unknown:8&12:Male:true:true:false:true:Derpy:Critters:derpycritters@gmail.com:Fierce hunter of the jungles!
